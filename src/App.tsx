@@ -4,6 +4,7 @@ import './App.css';
 
 function App() {
 
+  const test = ''
   const [state, setState] = useState(0)
   const [vlag, setVlag] = useState(0)
   const [int, setInt] = useState<boolean>()
