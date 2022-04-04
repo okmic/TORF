@@ -4,8 +4,7 @@ import './App.css';
 
 function App() {
 
-  const test = ''
-  const [state, setState] = useState(0)
+  const [temp, setTemp] = useState(0)
   const [vlag, setVlag] = useState(0)
   const [int, setInt] = useState<boolean>()
 
@@ -20,9 +19,9 @@ function App() {
   useEffect(() => {
     if (int === true) {
       const interval = setInterval(() => {
-        setState(Math.floor(Math.random() * 100))
+        setTemp(Math.floor(Math.random() * 100))
         setVlag(Math.floor(Math.random() * 100))
-    }, 300)
+    }, 1000)
     return () => clearInterval(interval)
     } else if (int === false) {
       console.log('stop')
@@ -30,11 +29,12 @@ function App() {
   }, [int])
 
   useEffect(() => {
-    console.log(state + " " + vlag)
-    if (state > 90 && vlag > 90) {
-      alert("Температура: " + state + " Влажность: " + vlag)
+    console.log(temp + " " + vlag)
+    /* (temp > 35 || vlag < 40) */
+    if (temp > 90 || vlag < 10) {
+      alert("Температура: " + temp + " Влажность: " + vlag)
     }
-  }, [state, vlag])
+  }, [temp, vlag])
 
   return (
     <div className="App">
