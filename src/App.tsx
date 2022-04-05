@@ -14,7 +14,7 @@ type ObjData = {
 function App() {
 
   const [data, setData] = useState<DataType>([] as DataType)
-  const [warrningData, setWarrningData] = useState([] as DataType)
+  const [warningData, setWarningData] = useState([] as DataType)
   const [lastNum, setLanstNum] = useState([0, 0])
   const [int, setInt] = useState<boolean>()
 
@@ -46,30 +46,25 @@ function App() {
   useEffect(() => {
     console.log(data)
     /* (temp > 35 || vlag < 40) */
-
     if(data) {
       data.forEach((item, index) => {    
-      setWarrningData([...warrningData, {...item}])
-        
+      
       if(index === data.length -1) {
           setLanstNum([item.uv, item.pv])
           if (item.uv > 90 || item.pv < 10) {
             alert("Температура: " + item.uv + " Влажность: " + item.pv)
+            setWarningData([...warningData, {...item}])
           }
 
         } else return
       })
-    }
-
-
-/*         if(data.length <= 1) {
-          if (data[data.length - 1].uv > 90 || data[data.length - 1].pv < 10) {
-            alert("Температура: " + data[data.length - 1].uv + " Влажность: " + data[0].pv)
-          }
-        } else return */
-    
+    }  
   }, [data]) 
 
+  
+  useEffect(() => {
+    console.log(warningData)
+  }, [warningData])
   return (
     <div className="App">
       <header className="App-header">
@@ -77,15 +72,18 @@ function App() {
         <button onClick={() => generateState('start')}>start</button>
         <button onClick={() => generateState('stop')}>stop</button>
          <Chart data={data} lastNum={lastNum} /> 
-        {warrningData.length >= 2 && warrningData.map(item => <div key={item.name}>
-          <span>{item.date}</span>
-          <span>{item.name}</span>
-          <span>{item.uv}</span>
-          <span>{item.pv}</span>
-        </div>)} 
+         {warningData && warningData.map(item => <div key={item.name}>
+          <ul style={{textDecoration: "none", listStyleType: 'none'}}>
+            <li>Дата: {String(item.date)}</li>
+            <li>Номер по порядку: {item.name}</li>
+            <li>Температура: {item.uv}</li>
+            <li>Влажность: {item.pv}</li>
+          </ul>
+        </div>)}
       </header>
+      
     </div>
   );
 }
 
-export default App;
+export default App
