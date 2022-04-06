@@ -12,12 +12,9 @@ import { DataType } from "./App";
 
 type PropsType = {
   data: DataType
-  lastNum: Array<number>
 }
 
-export default function Chart({data, lastNum}: PropsType) {
-
-
+export default function Chart({data}: PropsType) {
 
     const windowOuterWidth = window.outerWidth - 30
   return (

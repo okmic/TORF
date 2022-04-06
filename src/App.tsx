@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Chart from './Chart';
 
@@ -68,10 +67,24 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <button onClick={() => generateState('start')}>start</button>
-        <button onClick={() => generateState('stop')}>stop</button>
-         <Chart data={data} lastNum={lastNum} /> 
+        <h1>TORF</h1>
+
+        <div className="buttons">
+          <button 
+          style={{backgroundColor: int ? 'green' : 'white'}}
+          onClick={() => generateState('start')}>Start</button>
+          <button 
+          style={{backgroundColor: !int ? 'red' : 'white'}}
+          onClick={() => generateState('stop')}>Stop</button>
+        </div>
+    
+         <Chart data={data} /> 
+
+        <span>uv - Температура: <i><b>{lastNum[0]}</b></i></span>
+        <span>pv - Влажность: <i><b>{lastNum[1]}</b></i></span>
+        <br />
+        <br />
+
          {warningData && warningData.map(item => <div key={item.name}>
           <ul style={{textDecoration: "none", listStyleType: 'none'}}>
             <li>Дата: {String(item.date)}</li>
