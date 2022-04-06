@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/TORF/static/css/main.52bebc94.css",
+    "main.js": "/TORF/static/js/main.b3cb0b27.js",
+    "static/js/787.28cb0dcd.chunk.js": "/TORF/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/TORF/index.html",
+    "main.52bebc94.css.map": "/TORF/static/css/main.52bebc94.css.map",
+    "main.b3cb0b27.js.map": "/TORF/static/js/main.b3cb0b27.js.map",
+    "787.28cb0dcd.chunk.js.map": "/TORF/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.52bebc94.css",
+    "static/js/main.b3cb0b27.js"
+  ]
+}
