@@ -70,7 +70,9 @@ function App() {
   }, [data]) 
 
   useEffect(() => {
-    sendData()
+    if(lastNum[2]) {
+      sendData()
+    }
   }, [lastNum])
   
   useEffect(() => {
