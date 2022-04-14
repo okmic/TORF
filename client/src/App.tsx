@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Chart from './Chart';
+import { useHttp } from './hooks/http.hook';
 
 export type DataType = Array<ObjData>
 type ObjData = {
@@ -12,10 +13,18 @@ type ObjData = {
 
 function App() {
 
+  const {loading, error, request} =  useHttp()
   const [data, setData] = useState<DataType>([] as DataType)
   const [warningData, setWarningData] = useState([] as DataType)
-  const [lastNum, setLanstNum] = useState([0, 0])
+  const [lastNum, setLanstNum] = useState([0, 0, ''])
   const [int, setInt] = useState<boolean>()
+
+  const sendData = async () => {
+    try {
+        const data = await request('http://localhost:5000', 'POST', [...lastNum])
+        console.log(data)
+    } catch (e) {}
+  }
 
   useEffect(() => {
     if (int === true) {
@@ -49,7 +58,7 @@ function App() {
       data.forEach((item, index) => {    
       
       if(index === data.length -1) {
-          setLanstNum([item.uv, item.pv])
+          setLanstNum([item.uv, item.pv, String(item.date)])
           if (item.uv > 90 || item.pv < 10) {
             alert("Температура: " + item.uv + " Влажность: " + item.pv)
             setWarningData([...warningData, {...item}])
@@ -60,6 +69,9 @@ function App() {
     }  
   }, [data]) 
 
+  useEffect(() => {
+    sendData()
+  }, [lastNum])
   
   useEffect(() => {
     console.log(warningData)
