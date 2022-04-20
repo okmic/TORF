@@ -1,0 +1,15 @@
+.buttons{
+    display: flex;
+   }
+.buttons button {
+     margin: 1em;
+     padding: 5px 1em;
+     font-size: 30px;
+     border-radius: 15px;
+     border: none;
+     cursor: pointer;
+   }
+.buttons :hover {
+     color: rgb(22, 19, 211);
+     transition: 0.3s;
+   }

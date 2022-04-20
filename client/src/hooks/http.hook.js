@@ -1,11 +1,11 @@
-import React, {useState, useCallback} from "react"
+import {useCallback} from "react"
 
 export const useHttp = () => {
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(null)
+/*     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null) */
 
      const request =  useCallback(async (url, method = 'GET', body = null, headers = {}) => {
-         setLoading(true)
+         /* setLoading(true) */
         try {
         
             if(body) {
@@ -19,15 +19,15 @@ export const useHttp = () => {
             if (!response.ok) {
                 throw new Error(data.message || 'error')
             }
-            setLoading(false)
+/*             setLoading(false) */
 
             return data
         } catch (e) {
-            setLoading(false)
-            setError(e.message)
+/*             setLoading(false)
+            setError(e.message) */
             throw e
         }}, [])
 
-        const clearError = () => setError(null)
-    return { loading, request, error, clearError}
+/*         const clearError = () => setError(null) */
+    return { /* loading, */ request /* error, clearError */}
 }

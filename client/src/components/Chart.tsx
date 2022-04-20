@@ -8,7 +8,7 @@ import {
   Tooltip,
   Legend
 } from "recharts";
-import { DataType } from "./App";
+import {DataType} from '../pages/MainPage'
 
 type PropsType = {
   data: DataType

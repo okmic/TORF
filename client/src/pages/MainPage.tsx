@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import Chart from './Chart';
-import { useHttp } from './hooks/http.hook';
+import React, { memo, useEffect, useState } from 'react';
+import '../index.css';
+import Chart from '../components/Chart'
+import Buttons from '../components/Buttons'
+import WarningItem from '../components/WarningItem'
+import { useHttp } from '../hooks/http.hook';
+
 
 export type DataType = Array<ObjData>
 type ObjData = {
@@ -11,20 +14,29 @@ type ObjData = {
   pv: number
 }
 
-function App() {
+function MainPage() {
 
-  const {loading, error, request} =  useHttp()
+  const {request} =  useHttp()
   const [data, setData] = useState<DataType>([] as DataType)
   const [warningData, setWarningData] = useState([] as DataType)
   const [lastNum, setLanstNum] = useState([0, 0, ''])
-  const [int, setInt] = useState<boolean>()
+  const [int, setInt] = useState<boolean>(false)
 
   const sendData = async () => {
     try {
-        const data = await request('http://localhost:5000', 'POST', [...lastNum])
-        console.log(data)
-    } catch (e) {}
+        await request('http://localhost:5000', 'POST', [...lastNum])
+    } catch (e) {
+        console.error(e)
+    }
   }
+
+  const generateState = (order: string) => {
+    if (order === "stop") {
+      setInt(false)
+  } else {
+    setInt(true)
+  }
+}
 
   useEffect(() => {
     if (int === true) {
@@ -42,14 +54,6 @@ function App() {
     }
   }, [int, data])
 
-  const generateState = (order: string) => {
-    if (order === "stop") {
-      setInt(false)
-  } else {
-    setInt(true)
-  }
-}
-  
 
   useEffect(() => {
     console.log(data)
@@ -75,42 +79,32 @@ function App() {
     }
   }, [lastNum])
   
-  useEffect(() => {
-    console.log(warningData)
-  }, [warningData])
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>TORF</h1>
 
-        <div className="buttons">
-          <button 
-          style={{backgroundColor: int ? 'green' : 'white'}}
-          onClick={() => generateState('start')}>Start</button>
-          <button 
-          style={{backgroundColor: !int ? 'red' : 'white'}}
-          onClick={() => generateState('stop')}>Stop</button>
-        </div>
-    
-         <Chart data={data} /> 
+        <Buttons int={int} generateState={generateState} />
+        <Chart data={data} /> 
 
         <span>uv - Температура: <i><b>{lastNum[0]}</b></i></span>
         <span>pv - Влажность: <i><b>{lastNum[1]}</b></i></span>
+
         <br />
         <br />
 
-         {warningData && warningData.map(item => <div key={item.name}>
-          <ul style={{textDecoration: "none", listStyleType: 'none'}}>
-            <li>Дата: {String(item.date)}</li>
-            <li>Номер по порядку: {item.name}</li>
-            <li>Температура: {item.uv}</li>
-            <li>Влажность: {item.pv}</li>
-          </ul>
-        </div>)}
+         {warningData && warningData.map(item => <WarningItem key={item.name}
+         date={String(item.date)}
+         name={item.name}
+         pv={item.pv}
+         uv={item.uv}
+         />)}
+
       </header>
       
     </div>
   );
 }
 
-export default App
+export default memo(MainPage)
