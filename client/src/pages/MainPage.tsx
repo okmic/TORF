@@ -24,7 +24,7 @@ function MainPage() {
 
   const sendData = async () => {
     try {
-        await request('http://localhost:5000', 'POST', [...lastNum])
+        await request('http://localhost:5000/send', 'POST', [...lastNum])
     } catch (e) {
         console.error(e)
     }

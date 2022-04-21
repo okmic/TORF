@@ -4,7 +4,7 @@
 const path = require('path')
 const fs = require('fs').promises
 const logsPath = path.resolve(__dirname, './../data', 'data.txt')
-const db = require('./../db.js')
+const db = require('./../settings/db.js')
 const response = require('./../response.js')
 
 exports.index =  (req, res) => {
@@ -18,12 +18,23 @@ exports.index =  (req, res) => {
     }
 }
 
-exports.test = (req, res) => {
-     db.query('SELECT * FROM `users`', (error, rows, fields) => {
+exports.all = (req, res) => {
+     db.query('SELECT * FROM `data`', (error, rows, fields) => {
         if (error) {
             console.log('error')
          } else {
             response.status(rows, res)
          }
     })
+}
+
+exports.send = (req, res) => {
+    db.query("INSERT INTO `data` (`id`, `temperature`, `humidity`, `date`) VALUES " + `(NULL, ${req.body[0]}, ${req.body[1]}, CURRENT_TIMESTAMP)`, (error, rows, fields) => {
+       if (error) {
+           console.log('error')
+        } else {
+           response.status('ok', res)
+           console.log('ok')
+        }
+   })
 }
