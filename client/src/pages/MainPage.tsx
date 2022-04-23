@@ -4,6 +4,7 @@ import Chart from '../components/Chart'
 import Buttons from '../components/Buttons'
 import WarningItem from '../components/WarningItem'
 import { useHttp } from '../hooks/http.hook';
+import Download from '../components/Download';
 
 
 export type DataType = Array<ObjData>
@@ -22,9 +23,9 @@ function MainPage() {
   const [lastNum, setLanstNum] = useState([0, 0, ''])
   const [int, setInt] = useState<boolean>(false)
 
-  const sendData = async () => {
+  const sendData = () => {
     try {
-        await request('http://localhost:5000/send', 'POST', [...lastNum])
+        request('http://localhost:5000/send', 'POST', [...lastNum])
     } catch (e) {
         console.error(e)
     }
@@ -64,7 +65,7 @@ function MainPage() {
       if(index === data.length -1) {
           setLanstNum([item.uv, item.pv, String(item.date)])
           if (item.uv > 90 || item.pv < 10) {
-            alert("Температура: " + item.uv + " Влажность: " + item.pv)
+            /* alert("Температура: " + item.uv + " Влажность: " + item.pv) */
             setWarningData([...warningData, {...item}])
           }
 
@@ -84,7 +85,7 @@ function MainPage() {
     <div className="App">
       <header className="App-header">
         <h1>TORF</h1>
-
+        <Download />
         <Buttons int={int} generateState={generateState} />
         <Chart data={data} /> 
 

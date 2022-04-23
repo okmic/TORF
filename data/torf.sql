@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 21 2022 г., 15:53
+-- Время создания: Апр 23 2022 г., 12:10
 -- Версия сервера: 8.0.24
 -- Версия PHP: 7.1.33
 
@@ -35,12 +35,6 @@ CREATE TABLE `data` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Дамп данных таблицы `data`
---
-
-INSERT INTO `data` (`id`, `temperature`, `humidity`, `date`) VALUES
-
---
 -- Индексы сохранённых таблиц
 --
 
@@ -58,7 +52,7 @@ ALTER TABLE `data`
 -- AUTO_INCREMENT для таблицы `data`
 --
 ALTER TABLE `data`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
