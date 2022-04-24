@@ -3,7 +3,6 @@
 const mysql = require('mysql')
 
 const connection = mysql.createConnection({
-    connectionLimit: 5,
     host: 'localhost',
     user: 'root',
     password: '',
@@ -13,7 +12,10 @@ const connection = mysql.createConnection({
 
 connection.connect((error) => {
     if(error) {
-        return console.log('error database')
+        return () => {
+            connection.connect()
+            console.log(error)
+        }
     } else {
         return console.log('connected is true')
     }
