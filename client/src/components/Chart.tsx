@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -8,20 +9,50 @@ import {
   Tooltip,
   Legend
 } from "recharts";
-import {DataType} from '../pages/MainPage'
+import {DataType, ObjData} from '../pages/MainPage'
+import { ChartControlerButtons } from "./ChartControlerButtons/ChartControlerButtons";
 
 type PropsType = {
+  int: boolean
   data: DataType
 }
 
-export default function Chart({data}: PropsType) {
+export default function Chart({int, data}: PropsType) {
+
+    const [temp, setTemp] = useState(true)
+    const [hum, setHum] = useState(true)
+    const [controlerData, setData] = useState([] as DataType)
+
+    useEffect(() => {
+      if (!hum || !temp) {
+        setData(JSON.parse(JSON.stringify(data)).map((item: ObjData) => {
+        if(!temp) {
+          return({
+          data: item.date,
+          name: item.name,
+          uv: item.uv
+        })
+        } else if (!hum) {
+          return({
+            data: item.date,
+            name: item.name,
+            pv: item.pv
+          })
+        } 
+    }))} else setData(data)
+    }, [data, temp, hum])
+    
 
     const windowOuterWidth = window.outerWidth - 30
-  return (
+  return <>
+    <ChartControlerButtons 
+    hum={hum} temp={temp} int={int}
+    setHum={setHum} setTemp={setTemp}
+    />
     <LineChart
       width={windowOuterWidth}
       height={300}
-      data={data}
+      data={controlerData}
       margin={{
         top: 5,
         right: 30,
@@ -42,5 +73,5 @@ export default function Chart({data}: PropsType) {
       />
       <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
     </LineChart>
-  );
+  </>
 }

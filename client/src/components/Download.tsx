@@ -1,10 +1,12 @@
 import { memo } from "react"
-import classes from './index.module.css'
+import styles from './index.module.css'
 
 
-const Download = () => <div className={classes.buttons}>
+const Download = () => <div className={styles.wrapperButtons + " " + styles.center}>
     <button 
-    style={{backgroundColor:'green'}}><a href="http://localhost:5000/download" target="_blank">Download data</a></button>
+    className={styles.buttonsActive}>
+    <a href="http://localhost:5000/download" target="_blank">Download data</a>
+    </button>
   </div>
 
 

@@ -8,7 +8,7 @@ import Download from '../components/Download';
 
 
 export type DataType = Array<ObjData>
-type ObjData = {
+export type ObjData = {
   date: Date
   name: number
   uv: number
@@ -87,7 +87,7 @@ function MainPage() {
         <h1>TORF</h1>
         <Download />
         <Buttons int={int} generateState={generateState} />
-        <Chart data={data} /> 
+        <Chart int={int} data={data} /> 
 
         <span>uv - Температура: <i><b>{lastNum[0]}</b></i></span>
         <span>pv - Влажность: <i><b>{lastNum[1]}</b></i></span>

@@ -1,15 +1,35 @@
-.buttons{
-    display: flex;
-   }
-.buttons button {
-     margin: 1em;
-     padding: 5px 1em;
-     font-size: 30px;
-     border-radius: 15px;
-     border: none;
-     cursor: pointer;
-   }
-.buttons :hover {
-     color: rgb(22, 19, 211);
-     transition: 0.3s;
-   }
+.wrapperButtons {
+  width: 70%;
+  display: flex;
+  justify-content: flex-start;
+}
+.wrapperButtons.center {
+  justify-content: center;
+  margin: 1em 0;
+}
+.wrapperButtons button {
+  font-size: 19px;
+  transition: 0.5s;
+  padding: 5px 1em;
+  margin: 5px 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 1em;
+}
+.wrapperButtons button:hover {
+  transition: 0.5s;
+  transform: scale(1.3);
+}
+.wrapperButtons a {
+  text-decoration: none;
+  color: black;
+}
+
+.buttonsActive {
+  background-color: green;
+  color: white;
+}
+.buttonsStoped {
+  background-color: red;
+  color: white;
+}
