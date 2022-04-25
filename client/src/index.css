@@ -33,3 +33,24 @@ body {
 .App-link {
   color: #61dafb;
 }
+.WrapperInputs {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #3b3833;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.WrapperInputs input, button {
+  margin: 1em;
+  padding: 1em;
+  border-radius: 15px;
+  border: 1px solid red;
+}
+.WrapperInputs button {
+  padding: 5px 1.5em;
+  border: 1px solid red;
+  font-size: 21px;
+  cursor: pointer;
+}
